@@ -2,7 +2,7 @@ import React from 'react';
 import { Scene, Router, Actions } from 'react-native-router-flux'
 import AgeMenu from './components/AgeMenu';
 import TopicMenu from './components/TopicMenu';
-
+import Game from './components/Game';
 
 const RouterComponent = () => (
   <Router sceneStyle={{ paddingTop: 65 }}>
@@ -18,6 +18,12 @@ const RouterComponent = () => (
         key="topicMenu"
         component={TopicMenu}
         title="Topic"
+      />
+
+      <Scene
+        key="game"
+        component={Game}
+        title="Game"
       />
 
     </Scene>

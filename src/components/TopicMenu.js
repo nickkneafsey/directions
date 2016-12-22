@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
-import { CardSection } from './common';
+import { Actions } from 'react-native-router-flux';
+import Menu from './Menu';
 
 class TopicMenu extends Component {
-  render() {
+  onRowPress() {
+    Actions.game();
+  }
+
+  render () {
     return (
-      <CardSection>
-        <Text>
-          Topic
-        </Text>
-      </CardSection>
+      <Menu onRowPress={this.onRowPress} />
     )
   }
 }

@@ -1,27 +1,15 @@
 import React, { Component } from 'react';
-import { TouchableWithoutFeedback, Text, View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-
-import { CardSection } from './common';
+import Menu from './Menu';
 
 class AgeMenu extends Component {
   onRowPress() {
     Actions.topicMenu();
   }
 
-  render() {
+  render () {
     return (
-      <View>
-        <TouchableWithoutFeedback onPress={this.onRowPress.bind(this)}>
-          <View>
-            <CardSection>
-              <Text>
-                All Ages
-              </Text>
-            </CardSection>
-          </View>
-        </TouchableWithoutFeedback>
-      </View>
+      <Menu onRowPress={this.onRowPress} />
     )
   }
 }
