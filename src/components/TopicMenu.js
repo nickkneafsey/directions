@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import Menu from './Menu';
+import MenuItem from './MenuItem';
 
 class TopicMenu extends Component {
   onRowPress() {
@@ -9,7 +10,9 @@ class TopicMenu extends Component {
 
   render () {
     return (
-      <Menu onRowPress={this.onRowPress} />
+      <View>
+        <MenuItem onRowPress={this.onRowPress} text={"All Topics"} />
+      </View>
     )
   }
 }

@@ -2,14 +2,14 @@ import React from 'react';
 import { TouchableWithoutFeedback, Text, View } from 'react-native'
 import { CardSection } from './common';
 
-const Menu = ({ onRowPress }) => {
+const MenuItem = ({ onRowPress, text }) => {
   return (
     <View>
       <TouchableWithoutFeedback onPress={onRowPress.bind(this)}>
         <View>
           <CardSection>
             <Text>
-              All Ages
+              {text}
             </Text>
           </CardSection>
         </View>
@@ -18,4 +18,4 @@ const Menu = ({ onRowPress }) => {
   )
 }
 
-export default Menu;
+export default MenuItem;
