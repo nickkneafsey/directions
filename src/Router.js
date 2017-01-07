@@ -8,10 +8,15 @@ const RouterComponent = () => (
   <Router sceneStyle={{ paddingTop: 65 }}>
     <Scene key="main">
       <Scene
+        key="game"
+        component={Game}
+        title="Game"
+      />
+
+      <Scene
         key="ageMenu"
         component={AgeMenu}
         title="Select An Age Group"
-        initial
       />
 
       <Scene
@@ -20,11 +25,6 @@ const RouterComponent = () => (
         title="Topic"
       />
 
-      <Scene
-        key="game"
-        component={Game}
-        title="Game"
-      />
 
     </Scene>
 
