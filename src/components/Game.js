@@ -6,11 +6,14 @@ import { Actions } from 'react-native-router-flux';
 import Emoji from 'react-native-emoji';
 import { CardSection } from './common/CardSection';
 import TouchableEmoji from './TouchableEmoji';
+import ScorePage from './ScorePage';
 import sagaOne from '../sagas/SagaOne';
 import {
   addToAnswerArray,
   incrementQuestionIterator,
-  clearAnswerArray
+  clearAnswerArray,
+  incrementScore,
+  resetScore
 } from '../actions/GameActions';
 
 class Game extends Component {
@@ -19,20 +22,31 @@ class Game extends Component {
   }
 
   checkForWinner(answer, i) {
-    console.log("Answer Array", answer)
-    console.log("i", i);
-    console.log("correct answer", sagaOne[i].correctAnswer)
-    if (i > sagaOne.length) {
-      // Show score page
+    // Reset score if it is the first question
+    if (i === 0) {
+      this.props.resetScore();
     }
 
-    if (_.isEqual(sagaOne[i].correctAnswer, answer)) {
-      console.log("Win")
-      this.props.incrementQuestionIterator();
-      this.props.clearAnswerArray();
+    if (i === sagaOne.length) {
+      // Show score page
       this.render();
     } else {
-      console.log("Not a win")
+      console.log("Answer Array", answer);
+      console.log("i", i);
+      console.log("correct answer", sagaOne[i].correctAnswer);
+      if (_.isEqual(sagaOne[i].correctAnswer, answer)) {
+        console.log("Correct");
+        this.props.incrementQuestionIterator();
+        this.props.clearAnswerArray();
+        this.props.incrementScore();
+        this.render();
+      } else if (sagaOne[i].correctAnswer.length === answer.length) {
+        console.log("Incorrect");
+        this.props.incrementQuestionIterator();
+        this.props.clearAnswerArray();
+      } else {
+        console.log("In Progress")
+      }
     }
   }
 
@@ -42,7 +56,11 @@ class Game extends Component {
 
   // TODO fix the key below as it is bad practice
   render() {
-    const { i } = this.props;
+    const { i, score } = this.props;
+    if (i === sagaOne.length) {
+      return <ScorePage score={score} total={sagaOne.length} />
+    }
+
     return (
       <View>
         <CardSection>
@@ -67,12 +85,15 @@ class Game extends Component {
 const mapStateToProps = (state) => {
   return {
     answerArray: state.game.answerArray,
-    i: state.game.questionIterator
+    i: state.game.questionIterator,
+    score: state.game.score
   }
 };
 
 export default connect(mapStateToProps, {
   addToAnswerArray,
   incrementQuestionIterator,
-  clearAnswerArray
+  clearAnswerArray,
+  incrementScore,
+  resetScore
 })(Game);
