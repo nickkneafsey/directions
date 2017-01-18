@@ -9,6 +9,7 @@ class TopicMenu extends Component {
   }
 
   render () {
+    console.log('hi')
     return (
       <View>
         <MenuItem onRowPress={this.onRowPress} text={"All Topics"} />

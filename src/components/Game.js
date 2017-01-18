@@ -11,12 +11,19 @@ import sagaOne from '../sagas/SagaOne';
 import {
   addToAnswerArray,
   incrementQuestionIterator,
+  resetQuestionIterator,
   clearAnswerArray,
   incrementScore,
   resetScore
 } from '../actions/GameActions';
 
 class Game extends Component {
+  componentWillMount() {
+    console.log(this.props)
+    this.props.resetQuestionIterator();
+    this.props.resetScore();
+  }
+
   componentWillReceiveProps(nextProps) {
     this.checkForWinner(nextProps.answerArray, nextProps.i);
   }
@@ -77,6 +84,7 @@ class Game extends Component {
             )
           })
         }
+        <Text>{i}</Text>
       </View>
     )
   }
@@ -93,6 +101,7 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   addToAnswerArray,
   incrementQuestionIterator,
+  resetQuestionIterator,
   clearAnswerArray,
   incrementScore,
   resetScore
